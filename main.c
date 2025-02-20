@@ -16,6 +16,9 @@ int main(int argc, char *argv[])
     char lettre = 0; // Stocke la lettre proposée par l'utilisateur (retour du scanf)
     char motSecret[] = "ROUGE"; // C'est le mot à trouver
     int coupsRestants = 10; // Compteur de coups restants (0 = mort)
+    int nombreLettres = tailleMot(motSecret);
+
+    
     
     return 0;
 }
