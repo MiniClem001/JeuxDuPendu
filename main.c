@@ -17,8 +17,7 @@ int main(int argc, char *argv[])
     char motSecret[] = "ROUGE"; // C'est le mot à trouver
     int coupsRestants = 10; // Compteur de coups restants (0 = mort)
     int nombreLettres = tailleMot(motSecret);
-
-    
+    int *lettreTrouvee = NULL;
     
     return 0;
 }
