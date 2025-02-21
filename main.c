@@ -40,5 +40,9 @@ int main(int argc, char *argv[])
     lettreTrouvee = malloc(nombreLettres * sizeof(int));
     initTableau(lettreTrouvee, nombreLettres);
 
+    while (coupsRestants > 0 && !gagne(lettreTrouvee, nombreLettres))
+    {
+    }
+
     return 0;
 }
