@@ -91,5 +91,12 @@ int main(int argc, char *argv[])
             coupsRestants--;
     }
 
+    if (gagne(lettreTrouvee, nombreLettres))
+        printf("\n\nGagne ! Le mot secret etait bien : %s", motSecret);
+    else
+        printf("\n\nPerdu ! Le mot secret etait : %s", motSecret);
+
+    free(lettreTrouvee);
+
     return 0;
 }
