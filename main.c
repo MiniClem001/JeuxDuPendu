@@ -34,9 +34,9 @@ int main(int argc, char *argv[])
     }
 
     if (gagne(lettreTrouvee, nombreLettres))
-        printf("\n\nGagne ! Le mot secret etait bien : %s", motSecret);
+        printf("\n\nGagne ! Le mot secret etait bien : %s\n", motSecret);
     else
-        printf("\n\nPerdu ! Le mot secret etait : %s", motSecret);
+        printf("\n\nPerdu ! Le mot secret etait : %s\n", motSecret);
 
     return 0;
 }
@@ -88,7 +88,7 @@ int rechercheLettre(char lettre, char motSecret[], int *lettreTrouvee)
 {
     int bonneLettre = 0;
 
-    for (int i = 0; motSecret[i] != '\n'; i++)
+    for (int i = 0; motSecret[i] != '\0'; i++)
     {
         if (lettre == motSecret[i])
         {
