@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 int tailleMot(char motSecret[])
 {
@@ -30,6 +31,36 @@ int gagne(int *lettreTrouvee, int nombreLettres)
     return joueurGagne;
 }
 
+char lireCaractere()
+{
+    char caractere = 0;
+
+    caractere = getchar();          // On lit le premier caractère
+    caractere = toupper(caractere); // On met la lettre en majuscule si elle ne l'est pas déjà
+
+    // On lit les autres caractères mémorisés un à un jusqu'au \n (pour les effacer)
+    while (getchar() != '\n')
+        ;
+
+    return caractere; // On retourne le premier caractère qu'on a lu
+}
+
+int rechercheLettre(char lettre, char motSecret[], int *lettreTrouvee)
+{
+    int bonneLettre = 0;
+
+    for (int i = 0; motSecret[i] != '\n'; i++)
+    {
+        if (lettre == motSecret[i])
+        {
+            bonneLettre = 1;
+            lettreTrouvee[i] = 1;
+        }
+    }
+
+    return bonneLettre;
+}
+
 int main(int argc, char *argv[])
 {
     char lettre = 0;            // Stocke la lettre proposée par l'utilisateur (retour du scanf)
@@ -52,6 +83,12 @@ int main(int argc, char *argv[])
             else
                 printf("*");
         }
+
+        printf("\nProposez une lettre : ");
+        lettre = lireCaractere();
+
+        if (!rechercheLettre(lettre, motSecret, lettreTrouvee))
+            coupsRestants--;
     }
 
     return 0;
