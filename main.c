@@ -1,6 +1,45 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include "main.h"
+
+int main(int argc, char *argv[])
+{
+    char lettre = 0;            // Stocke la lettre proposée par l'utilisateur (retour du scanf)
+    char motSecret[] = "ROUGE"; // C'est le mot à trouver
+    int coupsRestants = 10;     // Compteur de coups restants (0 = mort)
+    int nombreLettres = tailleMot(motSecret);
+    int *lettreTrouvee = NULL; // Tableau de booleens
+    lettreTrouvee = malloc(nombreLettres * sizeof(int));
+    initTableau(lettreTrouvee, nombreLettres);
+
+    while (coupsRestants > 0 && !gagne(lettreTrouvee, nombreLettres))
+    {
+        printf("\n\nIl vous reste %d coups a jouer", coupsRestants);
+        printf("\nQuel est le mot secret ? ");
+
+        for (int i = 0; i < nombreLettres; i++)
+        {
+            if (lettreTrouvee[i])
+                printf("%c", motSecret[i]);
+            else
+                printf("*");
+        }
+
+        printf("\nProposez une lettre : ");
+        lettre = lireCaractere();
+
+        if (!rechercheLettre(lettre, motSecret, lettreTrouvee))
+            coupsRestants--;
+    }
+
+    if (gagne(lettreTrouvee, nombreLettres))
+        printf("\n\nGagne ! Le mot secret etait bien : %s", motSecret);
+    else
+        printf("\n\nPerdu ! Le mot secret etait : %s", motSecret);
+
+    return 0;
+}
 
 int tailleMot(char motSecret[])
 {
@@ -59,44 +98,4 @@ int rechercheLettre(char lettre, char motSecret[], int *lettreTrouvee)
     }
 
     return bonneLettre;
-}
-
-int main(int argc, char *argv[])
-{
-    char lettre = 0;            // Stocke la lettre proposée par l'utilisateur (retour du scanf)
-    char motSecret[] = "ROUGE"; // C'est le mot à trouver
-    int coupsRestants = 10;     // Compteur de coups restants (0 = mort)
-    int nombreLettres = tailleMot(motSecret);
-    int *lettreTrouvee = NULL; // Tableau de booleens
-    lettreTrouvee = malloc(nombreLettres * sizeof(int));
-    initTableau(lettreTrouvee, nombreLettres);
-
-    while (coupsRestants > 0 && !gagne(lettreTrouvee, nombreLettres))
-    {
-        printf("\n\nIl vous reste %d coups a jouer", coupsRestants);
-        printf("\nQuel est le mot secret ? ");
-
-        for (int i = 0; i < nombreLettres; i++)
-        {
-            if (lettreTrouvee[i])
-                printf("%c", motSecret[i]);
-            else
-                printf("*");
-        }
-
-        printf("\nProposez une lettre : ");
-        lettre = lireCaractere();
-
-        if (!rechercheLettre(lettre, motSecret, lettreTrouvee))
-            coupsRestants--;
-    }
-
-    if (gagne(lettreTrouvee, nombreLettres))
-        printf("\n\nGagne ! Le mot secret etait bien : %s", motSecret);
-    else
-        printf("\n\nPerdu ! Le mot secret etait : %s", motSecret);
-
-    free(lettreTrouvee);
-
-    return 0;
 }
