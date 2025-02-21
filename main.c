@@ -42,6 +42,16 @@ int main(int argc, char *argv[])
 
     while (coupsRestants > 0 && !gagne(lettreTrouvee, nombreLettres))
     {
+        printf("\n\nIl vous reste %d coups a jouer", coupsRestants);
+        printf("\nQuel est le mot secret ? ");
+
+        for (int i = 0; i < nombreLettres; i++)
+        {
+            if (lettreTrouvee[i])
+                printf("%c", motSecret[i]);
+            else
+                printf("*");
+        }
     }
 
     return 0;
